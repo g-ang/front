@@ -1,0 +1,24 @@
+.fastedit-box
+{
+  background:#5e5a5a;
+  opacity:0.9;
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+
+}
+
+  .fastedit-box .container {
+    border-radius: 2px;
+    background: #fff;
+    overflow-y: scroll;
+    height: 100%;
+    padding:12px 6px;
+  }
+
+
+.att-err {
+  color: red;
+}

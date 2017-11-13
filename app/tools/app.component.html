@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <div class="col-md-4">
+      <app-ranking-list></app-ranking-list>
+    </div>
+    <div class="col-md-8">
+       <output *ngIf="app" [elements]="elements" [request]="request" [app]="app"></output>
+    </div>
+</div>

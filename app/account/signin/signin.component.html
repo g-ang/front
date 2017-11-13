@@ -1,0 +1,17 @@
+<div class="container">
+  <form class="form" name="form" >
+    <div class="form-group" >
+      <label>电子邮箱:</label>
+      <input type="text" name="account.user"  [(ngModel)]="account.user" class="form-control" placeholder="请输入邮箱" required />
+     
+    </div>
+    <div>
+      <div class="form-group">
+        <label>密码:</label>
+        <input type="password" [(ngModel)]="account.password" class="form-control" name="password" required minlength="3" />
+       
+      </div>
+    </div>
+    <button type="submit" class="btn btn-danger"  (click)="signin()">登录</button>
+  </form>
+</div>

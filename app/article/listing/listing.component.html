@@ -1,0 +1,40 @@
+
+  <ul class="nav nav-tabs" id="myTab">
+    <li  *ngFor="let opt of options"  [class.active]="opt.active==true"  ><a href="javascript:void(0);" (click)="optionSw(opt)" data-toggle="tab">{{opt.label}}</a></li>
+   
+  </ul>
+    <div class="dw-hsb-content">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th><search [keyword]="keyword"></search></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="article-listing">
+                        <div *ngIf="articles" class="article-listing-box"  >
+                            <div *ngFor="let art of articles let index=index" style="position:relative;">
+                                <h4 class="article-title"><a routerLink="{{detial_url}}" queryParamsHandling="merge" [queryParams]="{id:art.id}" title="{{art.title}}">{{art.title}}</a></h4>
+                                <div style="position:absolute;right:6px; top:4px;" *ngIf="search_type == 'favorites'">
+                                  <a href="javascript:void(0);" (click)="cancelFav(index)"><i class="fa fa-heart" style="color:red;" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="article-shart-desc">{{art.short_desc}}</div>
+                                <hr *ngIf="index!=articles.length-1"/>
+                            </div>
+                          <div *ngIf="error_msg" style="text-align:center;color:#666;">{{error_msg}}</div>
+                        </div>
+                     
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="total>rowcount">
+                <tr>
+                    <td style="position:relative;">
+                        <div class="pull-left" [page]="page" [mod]="'url'" [baseurl]="detial_url" [rowcount]="rowcount" [total]="total" (callback)="search($event)"></div>
+                        
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>

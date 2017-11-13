@@ -1,0 +1,17 @@
+﻿ul li{
+    list-style:none;
+}
+
+.photo-left{
+    float:left;
+    width:128px;
+    margin-right:4px;
+}
+
+.photo-left li{
+    margin-bottom:1px;
+}
+
+.photo-big-show{
+    float:left;
+}

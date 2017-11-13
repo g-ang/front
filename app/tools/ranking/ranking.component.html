@@ -1,0 +1,14 @@
+
+<div *ngIf="apps">
+
+    <div *ngFor="let app of apps let index=index" class="app-list-item" >
+            <h3 class="rule-alternate"><a routerLink="/app/{{app.code}}" title="{{app.name}}">{{app.name}} </a></h3>
+            <div class="dw-hsb-content">
+                    {{app.seo.descript}}
+            </div>
+    </div>
+</div>
+
+
+
+

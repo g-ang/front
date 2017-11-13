@@ -1,0 +1,30 @@
+<header>
+    <nav class="navbar navbar-default" role="navigation">
+      
+          <div class="navbar-header">
+                  <a class="navbar-brand" routerLink="/" title="51helper.com">51<span style="color:coral;">Helper</span></a>
+
+            <div class="user-info">
+                <div *ngIf="user.uid">
+                  欢迎您,
+                  <div style="position:relative;display:inline-block;">
+                    <a href="javascript:void(0);">{{user.nick}}</a>&nbsp;<b class="caret" (click)="userOpts()"></b>
+                    <div class="user-opts" style="display:block" [style.display]="userOptOpen ? 'block' : 'none'">
+                      <a href="javascript:void(0);" (click)="signOut()">退出</a>
+                    </div>
+                  </div>
+                </div>
+                <span *ngIf="user.uid == 0">
+                  <button class="btn btn-primary  btn-xs" (click)="signin()" title="login 51helper.com">登录</button>
+                  <a href="javascript:void(0);" (click)="openQQAuthScreen()" target="_blank"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png" /></a>
+                </span>
+            </div>
+            </div>
+    </nav>
+</header>
+
+<div class="container-fluid">
+  <div style="height:72px;">&nbsp;</div>
+  <router-outlet></router-outlet> 
+</div>
+<footer></footer>

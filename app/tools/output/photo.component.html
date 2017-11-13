@@ -1,0 +1,14 @@
+﻿<div >
+    <div class="photo-left">
+        <ul *ngIf="data">
+            <li *ngFor="let photo of data let i=index"><a href="javascript:void(0)" (click)="show(i,photo)" title="{{photo.title}}"><img src="{{photo.small_url}}" /></a></li>
+        </ul>
+    </div>
+    <div class="photo-big-show">
+        <div *ngIf="photo">
+            <h3 *ngIf="photo.title">{{photo.title}}</h3>
+            <img src="{{photo.url}}" />
+            <p *ngIf="photo.intro">{{photo.intro}}</p>
+        </div>
+    </div>
+</div>

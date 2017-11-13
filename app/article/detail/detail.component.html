@@ -1,0 +1,20 @@
+<div *ngIf="info" class="article-info">
+    <div >
+        <h3 style="margin-top:6px;padding:0px;">
+            {{info.title}}
+        </h3>
+        <p class="article-info-nav">
+            <a href="javascript:void(0);" (click)="addFav()">收藏</a>&nbsp;&nbsp;阅读:{{info.readnum}}&nbsp;&nbsp;发布于:{{info.addtime}}
+         </p>
+        <div style="clear:both;"></div>
+    </div>
+    <hr style="margin-top:1px;"/>
+    <div class="article-body-content">
+            <p [innerHTML]="info.content"></p>
+    </div>
+
+    <div style="background:#f8f8f8;">
+      
+    </div>
+</div>
+

@@ -1,0 +1,45 @@
+﻿<div *ngIf="e">
+    <div *ngIf="e.type == 'enter'" class="form-group">
+        <label>{{e.label}}</label>
+        <input class="form-control" [(ngModel)]="e.value" [placeholder]="e.placeholder" />
+    </div>
+
+    <div *ngIf="e.type == 'textarea'" class="form-group">
+        <label>{{e.label}}</label>
+        <textarea class="form-control" [(ngModel)]="e.value" [placeholder]="[e.placeholder]" [title]="e.name"></textarea>
+    </div>
+
+    <div *ngIf="e.type == 'searchGroup'" class="form-group">
+        <label>{{e.label}}</label>
+        <div class="input-group">
+            <input class="form-control" [(ngModel)]="e.value" [placeholder]="e.placeholder" />
+            <span class="input-group-btn">
+                <button class="btn" (click)="submit({type:'but',name:attrs['buttonName'],value:attrs['buttonValue']})">{{attrs['buttonLabel']}}</button>
+            </span>
+        </div>
+    </div>
+
+    <div *ngIf="e.type == 'but'" class="pull-left" style="padding-right:5px;">
+        <button class="btn" (click)="submit(e)">{{e.label}}</button>
+    </div>
+
+    <div *ngIf="e.type == 'hidden'">
+        <input class="form-control" [value]="e.value" type="hidden" title="hidden:{{e.name}}" />
+    </div>
+
+    <div *ngIf="e.type == 'remarks'">
+        <div class="alert alert-warning" [innerHTML]="e.value"></div>
+    </div>
+
+    <div *ngIf="e.type == 'hr'">
+        <div style="clear:both;"></div>
+        <hr />
+    </div>
+
+    <div *ngIf="e.type == 'selectButton'">
+        <div class="form-group">
+            <label>{{e.label}}</label>
+            <div><p-selectButton [options]="e.attrs" [(ngModel)]="e.value"></p-selectButton></div>
+        </div>
+    </div>
+</div>

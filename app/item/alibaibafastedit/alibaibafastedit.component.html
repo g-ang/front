@@ -1,0 +1,135 @@
+<div class="fastedit-box">
+    <div style="height:72px;"></div>
+    <div class="container">
+        <div *ngIf="!item">
+          <button class="btn" (click)="paste()">PASTE</button>
+        </div>
+        <div *ngIf="item" >
+          <div class="col-md-2" style="position:relative;">
+            <div style="position:absolute;height:550px;" [style.top]="lefttop/2">
+              <div class="form-group">
+                <h4>参考值</h4>
+              </div>
+              <div style="height:90%;overflow-y:auto;">
+                <ul *ngIf="attrs" class="list-group">
+                  <li *ngFor="let att of attrs" class="list-group-item"><a href="javascript:void(0);" (click)="setAttr(att)">{{att.name}}</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-10">
+            <div class="form-group">
+              <button class="btn" (click)="paste()">RE PASTE</button>
+              <button class="btn" (click)="exportezbuy()">导出EXCEL</button>
+              <button class="btn btn-primary" (click)="upezbuy()" [disabled]="unSaveStatus">上传到EZ</button>
+              <button class="btn btn-primary" (click)="save()">保存</button>
+            </div>
+            <div class="form-group">
+              <label>货号: <b>{{item.sku}}</b></label>
+            </div>
+            <div class="form-group">
+              <label>商品类型</label>
+              <select [(ngModel)]="item.cid" class="form-control" (click)="getCategorys($event)">
+                <option *ngFor="let cate of myCategores let index=index" [ngValue]='cate.id'>{{cate.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>商品英文名称</label>
+              <input type="text" [(ngModel)]="item.name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>商品中文名称</label>
+              <input type="text" [(ngModel)]="item.cnname" class="form-control">
+            </div>
+            <div class="form-group" *ngIf="item.images">
+              <label>主图</label>
+              <div>
+                <dl *ngFor="let src of item.images let index=index" class="pull-left" style="background:#fff;border-radius:4px; padding:2px;margin-right:4px;border:1px solid #dfdfdf; text-align:center;">
+                  <dt style="padding:4px;"><img src="{{src}}" style="max-height:90px;" /></dt>
+                </dl>
+                <div style="clear:both;"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sx-4 pull-left">
+                <label>原价</label>
+                <input type="number" [(ngModel)]="item.oldprice" class="form-control" style="width:120px" placeholder="采购价格" title="采购价格" />
+              </div>
+              <div class="col-sx-4 pull-left">
+                <label>销售价</label>
+                <input type="number" [(ngModel)]="item.price" class="form-control" style="width:120px" placeholder="销售价格" title="销售价格" />
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+            <div class="form-group">
+              <label>颜色</label>
+              <div>
+                <ul *ngIf="item.colors && item.colors.length>0" style="padding:0px;margin:0px;">
+                  <li *ngFor="let color of item.colors let index=index" class="pull-left" style="padding-right:4px;">
+                    <input [(ngModel)]="color.name" type="text" [readonly]="color.id>0" class="form-control" [class.att-err]="color.id==0" style="width:120px;" (click)="onColor(color,$event)" (change)="changeColor(color)" (dblclick)="removeAttr(item.colors,index)" />
+                  </li>
+                </ul>
+                <button class="btn" (click)="addColor()">增加</button>
+                <div style="clear:both;"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>尺寸</label>
+              <div>
+                <ul *ngIf="item.sizes && item.sizes.length>0" style="padding:0px;margin:0px;">
+                  <li *ngFor="let size of item.sizes let index=index" class="pull-left" style="padding-right:4px;">
+                    <input [(ngModel)]="size.name" [readonly]="size.id>0" type="text" style="width:90px;" [class.att-err]="size.id==0" class="form-control" (click)="onSize(size,$event)" (change)="changeSize(size)" (dblclick)="removeAttr(item.sizes,index)" />
+                  </li>
+                </ul>
+                <button class="btn" (click)="addSize()">增加</button>
+                <div style="clear:both;"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>材质</label>
+              <div>
+                <ul *ngIf="materials && materials.length>0" style="padding:0px;margin:0px;">
+                  <li *ngFor="let mat of materials let index=index" class="pull-left" style="padding-right:4px;">
+                    <input (change)="updateMaterial(mat)" [checked]="mat.checked" type="checkbox" /> <label for="{{mat.id}}">{{mat.name}}</label>
+                  </li>
+                </ul>
+                <div style="clear:both;"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sx-3 pull-left">
+                <label>重量</label>
+                <input type="number" [(ngModel)]="item.weight" class="form-control" style="width:120px;" placeholder="高(cm)" title="高(cm)" />
+              </div>
+              <div class="col-sx-3 pull-left" style="padding-left:5px;">
+                <label>长</label>
+                <input type="number" [(ngModel)]="item.length" class="form-control" style="width:120px;" placeholder="长(cm)" title="长(cm)" />
+              </div>
+              <div class="col-sx-3 pull-left" style="padding-left:5px;">
+                <label>宽</label>
+                <input type="number" [(ngModel)]="item.width" class="form-control" style="width:120px;" placeholder="宽(cm)" title="宽(cm)" />
+              </div>
+              <div class="col-sx-3 pull-left" style="padding-left:5px;">
+                <label>高</label>
+                <input type="number" [(ngModel)]="item.height" class="form-control" style="width:120px;" placeholder="高(cm)" title="高(cm)" />
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+            <div class="form-group">
+              <label>详情</label>
+              <ckeditor [(ngModel)]="item.desc" debounce="500" [config]="{height:'600'}"></ckeditor>
+            </div>
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <div style="padding-left:4px"><button class="btn btn-primary btn-sm" (click)="save()">保存</button></div>
+            </div>
+
+            <div style="height:200px;"></div>
+          </div>
+          
+
+        </div>
+      </div>
+
+       
+</div>

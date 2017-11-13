@@ -1,0 +1,20 @@
+﻿<div *ngIf="app" class="output-info">
+    <div style="margin-bottom:10px;position:relative;">
+        <h2 style="margin-top:0px;padding:0px;">
+            {{app.name}}
+        </h2>
+        <div class="alert alert-danger" *ngIf="res && res.isSucc === false">
+            <a class="close"  (click)="res.error_msg='';res.isSucc=true;">×</a>
+            <strong>错误:</strong>{{res.error_msg}}
+        </div> 
+        <div style="clear:both;"></div>
+        <hr style="margin-top:1px;" />
+    </div>
+    <div class="output-body-content">
+        <div *ngFor="let e of elements">
+            <div [out_element]="e" (submit)="submit($event)"></div>
+        </div>
+        <ng-template output-host></ng-template>
+    </div>
+    <div style="clear:both;"></div>
+</div>
